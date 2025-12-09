@@ -1,0 +1,95 @@
+.main-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .app-header {
+    padding: 1rem;
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .user-name {
+    font-weight: 600;
+    color: #262626;
+  }
+  
+  .user-role {
+    color: #8e8e8e;
+    font-size: 0.9rem;
+  }
+  
+  .logout-button {
+    padding: 0.5rem 1rem;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  
+  .logout-button:hover {
+    background: #e0e0e0;
+  }
+  
+  .main-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .app-main {
+    flex: 1;
+    padding: 1rem;
+    background-color: #fafafa;
+    overflow-y: auto;
+  }
+  
+  /* Mobile styles (default) */
+  @media (max-width: 768px) {
+    .app-header h1 {
+      font-size: 1.25rem;
+    }
+    
+    .user-info {
+      gap: 0.5rem;
+    }
+    
+    .user-name {
+      font-size: 0.9rem;
+    }
+    
+    .user-role {
+      display: none;
+    }
+  }
+  
+  /* Desktop styles */
+  @media (min-width: 769px) {
+    .main-layout {
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+  
+    .main-content-wrapper {
+      flex-direction: row;
+    }
+  }
