@@ -1,5 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { CheckInProvider } from "./context/CheckInContext";
+import { LogsProvider } from "./context/LogsContext";
 import MainLayout from "./components/layout/MainLayout";
 // Student pages
 import StudentHome from './pages/student/StudentHome'
@@ -20,29 +22,37 @@ import "./App.css";
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            {/* Student routes */}
-            <Route path="/" element={<StudentHome />} />
-            <Route path="/checkin" element={<CheckIn />} />
-            <Route path="/logs" element={<Logs />} />
-
-            {/* Mentor routes */}
-            <Route path="/mentor" element={<MentorDashboard />} />
-            <Route path="/mentor/students" element={<MentorStudents />} />
-
-            {/* Admin routes */}
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/students" element={<AdminStudents />} />
-            <Route path="/admin/internships" element={<AdminInternships />} />
-
-            {/* Shared */}
-            <Route path="/profile" element={<Profile />} />
+      <CheckInProvider>
+        <LogsProvider>
+          <BrowserRouter>
+          <Routes>
+            {/* Login route - outside MainLayout */}
+            <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            
+            {/* All other routes - inside MainLayout */}
+            <Route element={<MainLayout />}>
+              {/* Student routes */}
+              <Route path="/home" element={<StudentHome />} />
+              <Route path="/checkin" element={<CheckIn />} />
+              <Route path="/logs" element={<Logs />} />
+
+              {/* Mentor routes */}
+              <Route path="/mentor" element={<MentorDashboard />} />
+              <Route path="/mentor/students" element={<MentorStudents />} />
+
+              {/* Admin routes */}
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/students" element={<AdminStudents />} />
+              <Route path="/admin/internships" element={<AdminInternships />} />
+
+              {/* Shared */}
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+          </Routes>
+          </BrowserRouter>
+        </LogsProvider>
+      </CheckInProvider>
     </AuthProvider>
   );
 }

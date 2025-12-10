@@ -20,7 +20,7 @@ function Navigation() {
     switch(user.role) {
       case 'student':
         return [
-          { path: '/', label: 'Home', icon: <Home /> },
+          { path: '/home', label: 'Home', icon: <Home /> },
           { path: '/checkin', label: 'Check In', icon: <CheckCircle /> },
           { path: '/logs', label: 'My Logs', icon: <Assignment /> },
           { path: '/profile', label: 'Profile', icon: <Person /> }

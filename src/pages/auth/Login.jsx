@@ -16,9 +16,11 @@ function Login() {
     }
 
     // Create fake user data
+    const email = `${name.toLowerCase().replace(/\s/g, '')}@example.com`;
     const userData = {
+      id: email, // Use email as unique ID
       name: name,
-      email: `${name.toLowerCase().replace(' ', '')}@example.com`,
+      email: email,
       role: selectedRole
     };
 
@@ -26,7 +28,7 @@ function Login() {
 
     // Navigate based on role
     if (selectedRole === 'student') {
-      navigate('/');
+      navigate('/home');
     } else if (selectedRole === 'admin') {
       navigate('/admin');
     } else if (selectedRole === 'mentor') {

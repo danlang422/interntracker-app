@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useCheckIn } from '../../context/CheckInContext';
+import { useAuth } from '../../context/AuthContext';
 import './CheckIn.css';
 
 function CheckIn() {
@@ -6,13 +8,17 @@ function CheckIn() {
   const [location, setLocation] = useState(null);
   const [locationError, setLocationError] = useState(null);
   const [locationLoading, setLocationLoading] = useState(true);
+  const { user } = useAuth();
 
-  // State for check-in status
-  const [isCheckedIn, setIsCheckedIn] = useState(false);
-  const [currentCheckIn, setCurrentCheckIn] = useState(null);
+  // Get check-in state and functions from context
+  const { isUserCheckedIn, getCurrentCheckIn, checkInHistory, checkIn, checkOut } = useCheckIn();
 
-  // State for check-in history
-  const [checkInHistory, setCheckInHistory] = useState([]);
+  // Get this user's current check-in status
+  const isCheckedIn = isUserCheckedIn(user.id);
+  const currentCheckIn = getCurrentCheckIn(user.id);
+
+  // Filter check-in history for this student
+  const myCheckIns = checkInHistory.filter(c => c.studentId === user.id);
 
   // Get user's location when component loads
   useEffect(() => {
@@ -36,44 +42,14 @@ function CheckIn() {
     }
   }, []);
 
-  // Handle check-in
+  // Handle check-in using context function
   const handleCheckIn = () => {
-    const checkIn = {
-      id: Date.now(), // Simple ID using timestamp
-      checkInTime: new Date().toISOString(),
-      checkOutTime: null,
-      location: location,
-      duration: null
-    };
-
-    setCurrentCheckIn(checkIn);
-    setIsCheckedIn(true);
+    checkIn(user.id, user.name, location);
   };
 
-  // Handle check-out
+  // Handle check-out using context function
   const handleCheckOut = () => {
-    if (!currentCheckIn) return;
-
-    const checkOutTime = new Date();
-    const checkInTime = new Date(currentCheckIn.checkInTime);
-    const durationMs = checkOutTime - checkInTime;
-    
-    // Calculate hours and minutes
-    const hours = Math.floor(durationMs / (1000 * 60 * 60));
-    const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
-
-    const completedCheckIn = {
-      ...currentCheckIn,
-      checkOutTime: checkOutTime.toISOString(),
-      duration: `${hours}h ${minutes}m`
-    };
-
-    // Add to history
-    setCheckInHistory([completedCheckIn, ...checkInHistory]);
-    
-    // Reset current check-in
-    setCurrentCheckIn(null);
-    setIsCheckedIn(false);
+    checkOut(user.id);
   };
 
   // Format date/time for display
@@ -141,11 +117,11 @@ function CheckIn() {
       </div>
 
       {/* Check-in History */}
-      {checkInHistory.length > 0 && (
+      {myCheckIns.length > 0 && (
         <div className="history-section">
           <h3>Recent Check-ins</h3>
           <div className="history-list">
-            {checkInHistory.map((checkIn) => (
+            {myCheckIns.map((checkIn) => (
               <div key={checkIn.id} className="history-item">
                 <div className="history-time">
                   <span className="check-in-time">

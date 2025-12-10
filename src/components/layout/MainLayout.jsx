@@ -1,11 +1,20 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useEffect } from 'react';
 import Navigation from './Navigation';
 import './MainLayout.css';
 
 function MainLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!user && location.pathname !== '/login') {
+      navigate('/login');
+    }
+  }, [user, navigate, location.pathname]);
 
   const handleLogout = () => {
     logout();
