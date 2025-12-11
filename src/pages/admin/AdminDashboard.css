@@ -1,0 +1,346 @@
+/* Admin Dashboard */
+.admin-dashboard-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h2 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.75rem;
+  color: #1a1a1a;
+}
+
+.subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: all 0.2s;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.highlight {
+  border-color: #fbbf24;
+  background: #fffbeb;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.stat-detail {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+}
+
+.stat-action {
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.stat-action:hover {
+  background: #1d4ed8;
+}
+
+/* Attention Section */
+.attention-section {
+  margin-bottom: 2rem;
+}
+
+.attention-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+}
+
+.attention-card {
+  background: white;
+  border: 1px solid #fbbf24;
+  border-left: 4px solid #fbbf24;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.attention-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.attention-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #1a1a1a;
+}
+
+.attention-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.attention-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.attention-item.more {
+  color: #6b7280;
+  justify-content: center;
+  font-style: italic;
+}
+
+.item-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+.item-detail {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Recent Activity */
+.recent-activity-section {
+  margin-bottom: 2rem;
+}
+
+.recent-activity-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+}
+
+.empty-activity {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.empty-activity p {
+  margin: 0.5rem 0;
+}
+
+.activity-list {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-item:hover {
+  background: #f9fafb;
+}
+
+.activity-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-text {
+  color: #374151;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.activity-text strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.activity-meta {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.schedule-note {
+  color: #6b7280;
+}
+
+/* Quick Actions */
+.quick-actions-section {
+  margin-bottom: 2rem;
+}
+
+.quick-actions-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.quick-action-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quick-action-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.action-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-top: 0.25rem;
+}
+
+.action-detail {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Buttons */
+.btn-secondary {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+.btn-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-dashboard-page {
+    padding: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .attention-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

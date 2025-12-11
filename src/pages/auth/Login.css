@@ -53,10 +53,12 @@
   .role-buttons {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .role-button {
     flex: 1;
+    min-width: calc(50% - 0.25rem);
     padding: 1rem 0.5rem;
     border: 2px solid #dbdbdb;
     border-radius: 8px;
@@ -74,6 +76,14 @@
     background: #667eea;
     color: white;
     border-color: #667eea;
+  }
+
+  .role-hint {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #667eea;
+    text-align: center;
+    font-weight: 500;
   }
   
   .login-button {

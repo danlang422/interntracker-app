@@ -2,6 +2,7 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useEffect } from 'react';
 import Navigation from './Navigation';
+import RoleSwitcher from './RoleSwitcher';
 import './MainLayout.css';
 
 function MainLayout() {
@@ -29,7 +30,8 @@ function MainLayout() {
         {user && (
           <div className="user-info">
             <span className="user-name">{user.name}</span>
-            <span className="user-role">({user.role})</span>
+            <span className="user-role">({user.activeRole})</span>
+            <RoleSwitcher />
             <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>
