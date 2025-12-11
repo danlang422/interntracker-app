@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useLogs } from '../../context/LogsContext';
 import { useCheckIn } from '../../context/CheckInContext';
-import './StudentHome.css';
 
 function StudentHome() {
   const { user } = useAuth();
@@ -84,20 +83,28 @@ function StudentHome() {
   };
 
   return (
-    <div className="student-home-page">
-      <div className="feed-header">
-        <h2>Activity Feed</h2>
-        
+    <div className="max-w-[800px] mx-auto p-5">
+      <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
+        <h2 className="m-0">Activity Feed</h2>
+
         {/* Filter Toggle */}
-        <div className="filter-toggle">
-          <button 
-            className={`filter-button ${filter === 'all' ? 'active' : ''}`}
+        <div className="flex gap-0 bg-[#e0e0e0] rounded-lg p-1">
+          <button
+            className={`px-5 py-2 border-none rounded-md cursor-pointer text-sm font-medium transition-all ${
+              filter === 'all'
+                ? 'bg-white text-[#4CAF50] shadow-[0_2px_4px_rgba(0,0,0,0.1)]'
+                : 'bg-transparent text-[#666] hover:text-[#333]'
+            }`}
             onClick={() => setFilter('all')}
           >
             Everyone
           </button>
-          <button 
-            className={`filter-button ${filter === 'mine' ? 'active' : ''}`}
+          <button
+            className={`px-5 py-2 border-none rounded-md cursor-pointer text-sm font-medium transition-all ${
+              filter === 'mine'
+                ? 'bg-white text-[#4CAF50] shadow-[0_2px_4px_rgba(0,0,0,0.1)]'
+                : 'bg-transparent text-[#666] hover:text-[#333]'
+            }`}
             onClick={() => setFilter('mine')}
           >
             My Activity
@@ -106,67 +113,71 @@ function StudentHome() {
       </div>
 
       {/* Feed */}
-      <div className="feed-container">
+      <div className="bg-white rounded-lg p-5 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
         {feedItems.length === 0 ? (
-          <div className="empty-feed">
-            <p>No activity to show yet.</p>
+          <div className="text-center py-16 px-5 text-[#666]">
+            <p className="my-2.5 text-lg font-medium text-[#333]">No activity to show yet.</p>
             {filter === 'mine' && (
-              <p>Create some logs or check in to see your activity here!</p>
+              <p className="my-2.5">Create some logs or check in to see your activity here!</p>
             )}
           </div>
         ) : (
-          <div className="feed-list">
+          <div className="flex flex-col gap-5">
             {feedItems.map((item) => (
-              <div key={`${item.type}-${item.id}`} className="feed-item">
+              <div key={`${item.type}-${item.id}`} className="border-2 border-[#e0e0e0] rounded-lg p-4 bg-[#fafafa] transition-all hover:border-[#ccc]">
                 {/* Header */}
-                <div className="feed-item-header">
-                  <div className="student-info">
-                    <span className="student-name">{item.studentName}</span>
-                    <span className="timestamp">{formatDateTime(item.timestamp)}</span>
+                <div className="flex justify-between items-start mb-3 pb-2.5 border-b border-[#e0e0e0] sm:flex-col sm:gap-2.5">
+                  <div className="flex flex-col gap-1">
+                    <span className="font-semibold text-[#333] text-base">{item.studentName}</span>
+                    <span className="text-[13px] text-[#888]">{formatDateTime(item.timestamp)}</span>
                   </div>
-                  <span className={`item-type-badge ${item.type}`}>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-xl whitespace-nowrap sm:self-start ${
+                    item.type === 'log'
+                      ? 'bg-[#e3f2fd] text-[#1976d2]'
+                      : 'bg-[#e8f5e9] text-[#2e7d32]'
+                  }`}>
                     {item.type === 'log' ? '📝 Log' : '✓ Check-in'}
                   </span>
                 </div>
 
                 {/* Content */}
-                <div className="feed-item-content">
+                <div className="mb-3">
                   {item.type === 'log' ? (
-                    <p className="log-text">{item.content}</p>
+                    <p className="m-0 leading-relaxed text-[#333] whitespace-pre-wrap">{item.content}</p>
                   ) : (
-                    <div className="checkin-summary">
+                    <div className="flex flex-col gap-2">
                       {item.checkOutTime ? (
                         // Completed check-in
                         <>
-                          <div className="checkin-time">
-                            <span>🟢 {new Date(item.checkInTime).toLocaleTimeString('en-US', { 
-                              hour: 'numeric', 
+                          <div className="flex items-center gap-2 text-sm text-[#555] flex-wrap sm:flex-col sm:items-start">
+                            <span>🟢 {new Date(item.checkInTime).toLocaleTimeString('en-US', {
+                              hour: 'numeric',
                               minute: '2-digit',
-                              hour12: true 
+                              hour12: true
                             })}</span>
-                            <span className="duration-arrow">→</span>
-                            <span>🔴 {new Date(item.checkOutTime).toLocaleTimeString('en-US', { 
-                              hour: 'numeric', 
+                            <span className="text-[#999] font-bold sm:hidden">→</span>
+                            <span>🔴 {new Date(item.checkOutTime).toLocaleTimeString('en-US', {
+                              hour: 'numeric',
                               minute: '2-digit',
-                              hour12: true 
+                              hour12: true
                             })}</span>
                           </div>
-                          <div className="checkin-duration">
-                            Duration: <strong>{item.duration}</strong>
+                          <div className="text-sm text-[#666]">
+                            Duration: <strong className="text-[#2e7d32] font-semibold">{item.duration}</strong>
                           </div>
                         </>
                       ) : (
                         // Active check-in (still in progress)
                         <>
-                          <div className="checkin-time active">
-                            <span>🟢 Checked in at {new Date(item.checkInTime).toLocaleTimeString('en-US', { 
-                              hour: 'numeric', 
+                          <div className="flex items-center gap-2 text-sm text-[#2e7d32] font-medium">
+                            <span>🟢 Checked in at {new Date(item.checkInTime).toLocaleTimeString('en-US', {
+                              hour: 'numeric',
                               minute: '2-digit',
-                              hour12: true 
+                              hour12: true
                             })}</span>
                           </div>
-                          <div className="checkin-status-active">
-                            <strong>Currently checked in</strong>
+                          <div className="text-sm text-[#2e7d32] bg-[#e8f5e9] px-3 py-2 rounded-md mt-1">
+                            <strong className="font-semibold">Currently checked in</strong>
                           </div>
                         </>
                       )}
@@ -175,11 +186,15 @@ function StudentHome() {
                 </div>
 
                 {/* Actions */}
-                <div className="feed-item-actions">
+                <div className="flex gap-2.5 pt-2 border-t border-[#e0e0e0]">
                   {/* Only show like button for completed check-ins or logs */}
                   {(item.type === 'log' || (item.type === 'checkin' && item.checkOutTime)) && (
-                    <button 
-                      className={`like-button ${hasLiked(item) ? 'liked' : ''}`}
+                    <button
+                      className={`flex items-center gap-1.5 px-3 py-1.5 border-2 rounded-full cursor-pointer text-sm font-medium transition-all ${
+                        hasLiked(item)
+                          ? 'border-[#ff4081] bg-[#fff0f5] text-[#ff4081] hover:scale-105'
+                          : 'border-[#e0e0e0] bg-white text-[#666] hover:border-[#ff4081] hover:text-[#ff4081] hover:scale-105'
+                      }`}
                       onClick={() => handleLike(item)}
                     >
                       {hasLiked(item) ? '❤️' : '🤍'} {(item.likes || []).length}
