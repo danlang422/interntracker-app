@@ -1,7 +1,6 @@
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { SwapHoriz } from '@mui/icons-material';
-import './RoleSwitcher.css';
+import { ArrowLeftRight } from 'lucide-react';
 
 function RoleSwitcher() {
   const { user, switchRole, needsRoleSwitcher } = useAuth();
@@ -28,12 +27,12 @@ function RoleSwitcher() {
   const otherRole = user.activeRole === 'advisor' ? 'mentor' : 'advisor';
 
   return (
-    <button 
-      className="role-switcher" 
+    <button
+      className="flex items-center gap-2 py-2 px-4 bg-[rgba(103,126,234,0.15)] border border-[rgba(103,126,234,0.3)] rounded text-[#667eea] text-[0.875rem] font-medium cursor-pointer transition-all ease-in-out duration-200 hover:bg-[rgba(103,126,234,0.25)] hover:border-[rgba(103,126,234,0.5)] active:scale-[0.98]"
       onClick={handleSwitchRole}
       title={`Switch to ${otherRole} view`}
     >
-      <SwapHoriz fontSize="small" />
+      <ArrowLeftRight size={18} />
       <span>Switch to {otherRole}</span>
     </button>
   );
