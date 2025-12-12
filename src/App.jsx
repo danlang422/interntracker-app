@@ -27,8 +27,10 @@ import AdminInternships from './pages/admin/AdminInternships'
 import MentorDashboard from './pages/mentor/MentorDashboard'
 import MentorStudents from './pages/mentor/MentorStudents'
 
-// Shared
+// Shared pages
 import Profile from './pages/shared/Profile'
+import CreatePage from './pages/shared/CreatePage'
+import NotificationsPage from './pages/shared/NotificationsPage'
 import Login from './pages/auth/Login'
 
 function App() {
@@ -47,6 +49,11 @@ function App() {
             
             {/* All other routes - inside MainLayout */}
             <Route element={<MainLayout />}>
+              {/* Shared routes (all roles) */}
+              <Route path="/create" element={<CreatePage />} />
+              <Route path="/notifications" element={<NotificationsPage />} />
+              <Route path="/profile" element={<Profile />} />
+
               {/* Student routes */}
               <Route path="/home" element={<StudentHome />} />
               <Route path="/checkin" element={<CheckIn />} />
@@ -66,9 +73,6 @@ function App() {
               {/* Mentor routes */}
               <Route path="/mentor" element={<MentorDashboard />} />
               <Route path="/mentor/students" element={<MentorStudents />} />
-
-              {/* Shared */}
-              <Route path="/profile" element={<Profile />} />
             </Route>
           </Routes>
                 </BrowserRouter>
