@@ -233,6 +233,15 @@ function AdminDashboard() {
 
           <button
             className="bg-white border border-[#e5e7eb] rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center gap-2 hover:border-[#2563eb] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
+            onClick={() => navigate('/admin/competencies')}
+          >
+            <div className="text-[2.5rem] leading-none">🎓</div>
+            <div className="text-base font-semibold text-[#1a1a1a] mt-1">XQ Competencies</div>
+            <div className="text-[0.85rem] text-[#6b7280]">View learning outcomes</div>
+          </button>
+
+          <button
+            className="bg-white border border-[#e5e7eb] rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center gap-2 hover:border-[#2563eb] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
             onClick={() => navigate('/profile')}
           >
             <div className="text-[2.5rem] leading-none">⚙️</div>

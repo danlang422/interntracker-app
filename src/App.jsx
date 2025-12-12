@@ -22,6 +22,7 @@ import AdvisorLogs from './pages/advisor/AdvisorLogs'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminStudents from './pages/admin/AdminStudents'
 import AdminInternships from './pages/admin/AdminInternships'
+import AdminCompetencies from './pages/admin/AdminCompetencies'
 
 // Mentor pages
 import MentorDashboard from './pages/mentor/MentorDashboard'
@@ -69,6 +70,7 @@ function App() {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/students" element={<AdminStudents />} />
               <Route path="/admin/internships" element={<AdminInternships />} />
+              <Route path="/admin/competencies" element={<AdminCompetencies />} />
 
               {/* Mentor routes */}
               <Route path="/mentor" element={<MentorDashboard />} />
