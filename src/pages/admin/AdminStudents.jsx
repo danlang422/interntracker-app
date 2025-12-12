@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useStudents } from '../../context/StudentsContext';
 import { useAssignments } from '../../context/AssignmentsContext';
 import { useInternships } from '../../context/InternshipsContext';
-import './AdminStudents.css';
 
 function AdminStudents() {
   const {
@@ -163,28 +162,29 @@ function AdminStudents() {
   };
 
   return (
-    <div className="admin-students-page">
+    <div className="p-8 max-w-[1400px] mx-auto max-md:p-4">
       {/* Header */}
-      <div className="page-header">
-        <h2>Manage Students</h2>
-        <button className="btn-primary" onClick={handleCreate}>
+      <div className="flex justify-between items-center mb-8 flex-wrap gap-4 max-md:flex-col max-md:items-start">
+        <h2 className="m-0 text-[1.75rem] text-[#1a1a1a]">Manage Students</h2>
+        <button className="px-5 py-2.5 border-none rounded-md text-[0.95rem] font-medium cursor-pointer transition-all bg-blue-600 text-white hover:bg-blue-700" onClick={handleCreate}>
           + New Student
         </button>
       </div>
 
       {/* Filters */}
-      <div className="filters-section">
-        <div className="search-box">
+      <div className="bg-white border border-gray-200 rounded-lg p-5 mb-4">
+        <div className="mb-4">
           <input
             type="text"
             placeholder="Search by name or email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-md text-[0.95rem] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
           />
         </div>
 
-        <div className="filter-controls">
-          <select value={filterGrade} onChange={(e) => setFilterGrade(e.target.value)}>
+        <div className="flex gap-4 flex-wrap items-center max-md:w-full">
+          <select value={filterGrade} onChange={(e) => setFilterGrade(e.target.value)} className="py-2.5 pr-8 pl-3 border border-gray-300 rounded-md text-[0.9rem] bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2212%22%20height=%2212%22%20viewBox=%220%200%2012%2012%22%3E%3Cpath%20fill=%22%23374151%22%20d=%22M6%209L1%204h10z%22/%3E%3C/svg%3E')] bg-no-repeat bg-[right_0.75rem_center] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] max-md:flex-1 max-md:min-w-[120px]">
             <option value="all">All Grades</option>
             <option value="9">9th Grade</option>
             <option value="10">10th Grade</option>
@@ -192,7 +192,7 @@ function AdminStudents() {
             <option value="12">12th Grade</option>
           </select>
 
-          <select value={filterInternship} onChange={(e) => setFilterInternship(e.target.value)}>
+          <select value={filterInternship} onChange={(e) => setFilterInternship(e.target.value)} className="py-2.5 pr-8 pl-3 border border-gray-300 rounded-md text-[0.9rem] bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2212%22%20height=%2212%22%20viewBox=%220%200%2012%2012%22%3E%3Cpath%20fill=%22%23374151%22%20d=%22M6%209L1%204h10z%22/%3E%3C/svg%3E')] bg-no-repeat bg-[right_0.75rem_center] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] max-md:flex-1 max-md:min-w-[120px]">
             <option value="all">All Internships</option>
             <option value="unassigned">Unassigned</option>
             {activeInternships.map(internship => (
@@ -202,11 +202,12 @@ function AdminStudents() {
             ))}
           </select>
 
-          <label className="toggle-inactive">
+          <label className="flex items-center gap-2 text-[0.9rem] text-[#666] cursor-pointer select-none">
             <input
               type="checkbox"
               checked={showInactive}
               onChange={(e) => setShowInactive(e.target.checked)}
+              className="cursor-pointer"
             />
             Show Inactive
           </label>
@@ -214,24 +215,24 @@ function AdminStudents() {
       </div>
 
       {/* Results count */}
-      <div className="results-summary">
+      <div className="mb-4 text-gray-500 text-[0.9rem]">
         Showing {displayedStudents.length} of {allStudents.filter(s => showInactive || s.isActive).length} students
       </div>
 
       {/* Form Modal */}
       {showForm && (
-        <div className="modal-overlay" onClick={handleCancel}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3>{editingId ? 'Edit Student' : 'Create New Student'}</h3>
-              <button className="close-button" onClick={handleCancel}>×</button>
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000] p-4" onClick={handleCancel}>
+          <div className="bg-white rounded-xl w-full max-w-[700px] max-h-[90vh] overflow-y-auto shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1)] max-md:m-4 max-md:max-h-[calc(100vh-2rem)]" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+              <h3 className="m-0 text-xl text-[#1a1a1a]">{editingId ? 'Edit Student' : 'Create New Student'}</h3>
+              <button className="bg-none border-none text-[2rem] text-gray-400 cursor-pointer leading-none p-0 w-8 h-8 flex items-center justify-center rounded transition-all hover:bg-gray-100 hover:text-gray-700" onClick={handleCancel}>×</button>
             </div>
 
-            <form onSubmit={handleSubmit} className="student-form">
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name">
-                    Full Name <span className="required">*</span>
+            <form onSubmit={handleSubmit} className="p-6">
+              <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+                <div className="mb-5">
+                  <label htmlFor="name" className="block mb-2 font-medium text-gray-700 text-[0.9rem]">
+                    Full Name <span className="text-red-600">*</span>
                   </label>
                   <input
                     type="text"
@@ -241,12 +242,13 @@ function AdminStudents() {
                     onChange={handleInputChange}
                     required
                     placeholder="First Last"
+                    className="w-full p-2.5 border border-gray-300 rounded-md text-[0.95rem] font-[inherit] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="gradeLevel">
-                    Grade Level <span className="required">*</span>
+                <div className="mb-5">
+                  <label htmlFor="gradeLevel" className="block mb-2 font-medium text-gray-700 text-[0.9rem]">
+                    Grade Level <span className="text-red-600">*</span>
                   </label>
                   <select
                     id="gradeLevel"
@@ -254,6 +256,7 @@ function AdminStudents() {
                     value={formData.gradeLevel}
                     onChange={handleInputChange}
                     required
+                    className="w-full p-2.5 border border-gray-300 rounded-md text-[0.95rem] font-[inherit] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
                   >
                     <option value="">Select grade</option>
                     <option value={9}>9th Grade</option>
@@ -264,9 +267,9 @@ function AdminStudents() {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email">
-                  Email <span className="required">*</span>
+              <div className="mb-5">
+                <label htmlFor="email" className="block mb-2 font-medium text-gray-700 text-[0.9rem]">
+                  Email <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="email"
@@ -276,15 +279,16 @@ function AdminStudents() {
                   onChange={handleInputChange}
                   required
                   placeholder="student@cityview.cr.k12.ia.us"
+                  className="w-full p-2.5 border border-gray-300 rounded-md text-[0.95rem] font-[inherit] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
                 />
-                <small className="form-hint">
+                <small className="block mt-1 text-[0.85rem] text-gray-500">
                   Used for Google OAuth login
                 </small>
               </div>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="phoneNumber">Phone Number</label>
+              <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+                <div className="mb-5">
+                  <label htmlFor="phoneNumber" className="block mb-2 font-medium text-gray-700 text-[0.9rem]">Phone Number</label>
                   <input
                     type="tel"
                     id="phoneNumber"
@@ -292,11 +296,12 @@ function AdminStudents() {
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     placeholder="(319) 555-1234"
+                    className="w-full p-2.5 border border-gray-300 rounded-md text-[0.95rem] font-[inherit] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="assignedAdvisor">Assigned Advisor</label>
+                <div className="mb-5">
+                  <label htmlFor="assignedAdvisor" className="block mb-2 font-medium text-gray-700 text-[0.9rem]">Assigned Advisor</label>
                   <input
                     type="email"
                     id="assignedAdvisor"
@@ -304,12 +309,13 @@ function AdminStudents() {
                     value={formData.assignedAdvisor}
                     onChange={handleInputChange}
                     placeholder="advisor@cityview.cr.k12.ia.us"
+                    className="w-full p-2.5 border border-gray-300 rounded-md text-[0.95rem] font-[inherit] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
                   />
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="emergencyContact">Emergency Contact</label>
+              <div className="mb-5">
+                <label htmlFor="emergencyContact" className="block mb-2 font-medium text-gray-700 text-[0.9rem]">Emergency Contact</label>
                 <input
                   type="text"
                   id="emergencyContact"
@@ -317,11 +323,12 @@ function AdminStudents() {
                   value={formData.emergencyContact}
                   onChange={handleInputChange}
                   placeholder="Name (Relationship) - Phone"
+                  className="w-full p-2.5 border border-gray-300 rounded-md text-[0.95rem] font-[inherit] transition-colors focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="notes">Notes</label>
+              <div className="mb-5">
+                <label htmlFor="notes" className="block mb-2 font-medium text-gray-700 text-[0.9rem]">Notes</label>
                 <textarea
                   id="notes"
                   name="notes"
@@ -329,14 +336,15 @@ function AdminStudents() {
                   onChange={handleInputChange}
                   rows="3"
                   placeholder="Any additional information about this student..."
+                  className="w-full p-2.5 border border-gray-300 rounded-md text-[0.95rem] font-[inherit] transition-colors resize-y min-h-[60px] focus:outline-none focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
                 />
               </div>
 
-              <div className="form-actions">
-                <button type="button" className="btn-secondary" onClick={handleCancel}>
+              <div className="flex justify-end gap-3 mt-6 pt-6 border-t border-gray-200">
+                <button type="button" className="px-5 py-2.5 border-none rounded-md text-[0.95rem] font-medium cursor-pointer transition-all bg-gray-100 text-gray-700 hover:bg-gray-200" onClick={handleCancel}>
                   Cancel
                 </button>
-                <button type="submit" className="btn-primary">
+                <button type="submit" className="px-5 py-2.5 border-none rounded-md text-[0.95rem] font-medium cursor-pointer transition-all bg-blue-600 text-white hover:bg-blue-700">
                   {editingId ? 'Save Changes' : 'Create Student'}
                 </button>
               </div>
@@ -346,40 +354,40 @@ function AdminStudents() {
       )}
 
       {/* Students List */}
-      <div className="students-list">
+      <div className="grid gap-4">
         {displayedStudents.length === 0 ? (
-          <div className="empty-state">
+          <div className="text-center py-12 px-4 text-gray-500">
             <p>No students match your filters.</p>
           </div>
         ) : (
           displayedStudents.map((student) => {
             const assignment = getStudentAssignment(student.id);
-            
+
             return (
-              <div 
-                key={student.id} 
-                className={`student-card ${!student.isActive ? 'inactive' : ''}`}
+              <div
+                key={student.id}
+                className={`bg-white border border-gray-200 rounded-lg overflow-hidden transition-shadow hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] ${!student.isActive ? 'opacity-60 bg-gray-50' : ''}`}
               >
-                <div className="card-header">
-                  <div className="student-info-header">
-                    <h3>{student.name}</h3>
-                    <span className="grade-badge">Grade {student.gradeLevel}</span>
+                <div className="flex justify-between items-start p-5 bg-gray-50 border-b border-gray-200 max-md:flex-col max-md:gap-4">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h3 className="m-0 text-[1.15rem] text-[#1a1a1a]">{student.name}</h3>
+                    <span className="inline-block px-2.5 py-1 rounded-xl text-xs font-medium bg-blue-100 text-blue-800">Grade {student.gradeLevel}</span>
                     {!student.isActive && (
-                      <span className="status-badge inactive">Inactive</span>
+                      <span className="inline-block px-2.5 py-1 rounded-xl text-xs font-medium uppercase tracking-wider bg-red-100 text-red-800">Inactive</span>
                     )}
                   </div>
-                  <div className="card-actions">
+                  <div className="flex gap-2 max-md:w-full max-md:justify-end">
                     {student.isActive ? (
                       <>
-                        <button 
-                          className="btn-icon" 
+                        <button
+                          className="bg-none border-none text-xl cursor-pointer p-1.5 rounded transition-colors hover:bg-gray-100"
                           onClick={() => handleEdit(student)}
                           title="Edit"
                         >
                           ✏️
                         </button>
-                        <button 
-                          className="btn-icon danger" 
+                        <button
+                          className="bg-none border-none text-xl cursor-pointer p-1.5 rounded transition-colors hover:bg-red-100"
                           onClick={() => handleDeactivate(student.id)}
                           title="Deactivate"
                         >
@@ -387,8 +395,8 @@ function AdminStudents() {
                         </button>
                       </>
                     ) : (
-                      <button 
-                        className="btn-secondary btn-small" 
+                      <button
+                        className="px-3 py-1.5 border-none rounded-md text-[0.85rem] font-medium cursor-pointer transition-all bg-gray-100 text-gray-700 hover:bg-gray-200"
                         onClick={() => handleReactivate(student.id)}
                       >
                         Reactivate
@@ -397,40 +405,40 @@ function AdminStudents() {
                   </div>
                 </div>
 
-                <div className="card-body">
-                  <div className="info-row">
-                    <span className="label">✉️ Email:</span>
-                    <span><a href={`mailto:${student.email}`}>{student.email}</a></span>
+                <div className="p-5">
+                  <div className="flex gap-3 mb-3 text-[0.95rem] items-center max-md:flex-col max-md:items-start max-md:gap-1">
+                    <span className="font-medium text-gray-500 min-w-[100px] max-md:min-w-0">✉️ Email:</span>
+                    <span><a href={`mailto:${student.email}`} className="text-blue-600 no-underline hover:underline">{student.email}</a></span>
                   </div>
 
                   {student.phoneNumber && (
-                    <div className="info-row">
-                      <span className="label">📞 Phone:</span>
-                      <span><a href={`tel:${student.phoneNumber}`}>{student.phoneNumber}</a></span>
+                    <div className="flex gap-3 mb-3 text-[0.95rem] items-center max-md:flex-col max-md:items-start max-md:gap-1">
+                      <span className="font-medium text-gray-500 min-w-[100px] max-md:min-w-0">📞 Phone:</span>
+                      <span><a href={`tel:${student.phoneNumber}`} className="text-blue-600 no-underline hover:underline">{student.phoneNumber}</a></span>
                     </div>
                   )}
 
                   {student.assignedAdvisor && (
-                    <div className="info-row">
-                      <span className="label">👤 Advisor:</span>
+                    <div className="flex gap-3 mb-3 text-[0.95rem] items-center max-md:flex-col max-md:items-start max-md:gap-1">
+                      <span className="font-medium text-gray-500 min-w-[100px] max-md:min-w-0">👤 Advisor:</span>
                       <span>{student.assignedAdvisor}</span>
                     </div>
                   )}
 
                   {student.emergencyContact && (
-                    <div className="info-row">
-                      <span className="label">🚨 Emergency:</span>
+                    <div className="flex gap-3 mb-3 text-[0.95rem] items-center max-md:flex-col max-md:items-start max-md:gap-1">
+                      <span className="font-medium text-gray-500 min-w-[100px] max-md:min-w-0">🚨 Emergency:</span>
                       <span>{student.emergencyContact}</span>
                     </div>
                   )}
 
-                  <div className="info-row">
-                    <span className="label">🏢 Internship:</span>
+                  <div className="flex gap-3 mb-3 text-[0.95rem] items-center max-md:flex-col max-md:items-start max-md:gap-1">
+                    <span className="font-medium text-gray-500 min-w-[100px] max-md:min-w-0">🏢 Internship:</span>
                     {student.isActive ? (
                       <select
                         value={assignment ? assignment.internshipId : 'none'}
                         onChange={(e) => handleQuickAssignInternship(student.id, e.target.value)}
-                        className="quick-assign-select"
+                        className="py-1.5 px-2.5 border border-gray-300 rounded text-[0.9rem] cursor-pointer bg-white transition-colors focus:outline-none focus:border-blue-600 max-md:w-full"
                       >
                         <option value="none">Not assigned</option>
                         {activeInternships.map(internship => (
@@ -445,18 +453,18 @@ function AdminStudents() {
                   </div>
 
                   {assignment && (
-                    <div className="assignment-note">
-                      <small>
+                    <div className="mt-2 p-3 bg-blue-50 border-l-[3px] border-blue-500 rounded">
+                      <small className="text-blue-900 leading-relaxed">
                         📝 To set schedule details, manage this student from the{' '}
-                        <a href="/admin/internships">Internships page</a>
+                        <a href="/admin/internships" className="text-blue-600 underline font-medium hover:text-blue-700">Internships page</a>
                       </small>
                     </div>
                   )}
 
                   {student.notes && (
-                    <div className="notes-section">
-                      <span className="label">📝 Notes:</span>
-                      <p>{student.notes}</p>
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <span className="font-medium text-gray-500 block mb-2">📝 Notes:</span>
+                      <p className="m-0 text-gray-600 leading-relaxed">{student.notes}</p>
                     </div>
                   )}
                 </div>
