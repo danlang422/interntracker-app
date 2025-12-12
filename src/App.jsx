@@ -30,7 +30,6 @@ import MentorStudents from './pages/mentor/MentorStudents'
 // Shared
 import Profile from './pages/shared/Profile'
 import Login from './pages/auth/Login'
-import "./App.css";
 
 function App() {
   return (
