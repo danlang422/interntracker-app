@@ -233,6 +233,33 @@ function AdminDashboard() {
 
           <button
             className="bg-white border border-[#e5e7eb] rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center gap-2 hover:border-[#2563eb] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
+            onClick={() => navigate('/admin/block-types')}
+          >
+            <div className="text-[2.5rem] leading-none">📋</div>
+            <div className="text-base font-semibold text-[#1a1a1a] mt-1">Block Types</div>
+            <div className="text-[0.85rem] text-[#6b7280]">Define schedule blocks</div>
+          </button>
+
+          <button
+            className="bg-white border border-[#e5e7eb] rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center gap-2 hover:border-[#2563eb] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
+            onClick={() => navigate('/admin/schedule-templates')}
+          >
+            <div className="text-[2.5rem] leading-none">📅</div>
+            <div className="text-base font-semibold text-[#1a1a1a] mt-1">Schedule Templates</div>
+            <div className="text-[0.85rem] text-[#6b7280]">SIS reporting blocks</div>
+          </button>
+
+          <button
+            className="bg-white border border-[#e5e7eb] rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center gap-2 hover:border-[#2563eb] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
+            onClick={() => navigate('/admin/sections')}
+          >
+            <div className="text-[2.5rem] leading-none">📚</div>
+            <div className="text-base font-semibold text-[#1a1a1a] mt-1">Sections</div>
+            <div className="text-[0.85rem] text-[#6b7280]">Define Schedule Sections</div>
+          </button>
+
+          <button
+            className="bg-white border border-[#e5e7eb] rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center gap-2 hover:border-[#2563eb] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
             onClick={() => navigate('/admin/competencies')}
           >
             <div className="text-[2.5rem] leading-none">🎓</div>
